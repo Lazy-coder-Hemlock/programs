@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+void stock_span(int arr[],int size,int span[]){
+	stack<int>st;
+	st.push(0);
+	span[0]=1;
+	for(int i=1;i<size;i++){
+		if(!st.empty() and arr[st.top()]<=arr[i])
+		st.pop();
+		if(st.empty())
+		span[i]=i+1;
+		else
+		span[i]=i-st.top();
+	st.push(i);
+	}
+}
+void print(int arr[],int size){
+	for(int i=0;i<size;i++)cout<<arr[i]<<" ";
+}
+int main(){
+	int size;
+	cin>>size;
+	int *arr=new int[size];
+	int *span=new int[size];
+	for(int i=0;i<size;i++)cin>>arr[i];
+	stock_span(arr,size,span);
+	print(span,size);
+	delete[]arr;
+	delete[]span;
+	}
